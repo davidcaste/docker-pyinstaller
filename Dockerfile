@@ -5,7 +5,7 @@ FROM python:${BASE_TAG}
 ADD install-rust.sh /install-rust.sh
 
 RUN apt-get update -qq && \
-    apt-get install -y --no-install-recommends \
+    apt-get install -yq --no-install-recommends \
       binutils \
       curl \
       g++ \
@@ -13,11 +13,9 @@ RUN apt-get update -qq && \
       make \
       musl \
       musl-dev \
-      musl-tools \
-      scons && \
+      musl-tools && \
     pip install -U pip setuptools wheel && \
-    pip install patchelf-wrapper SCons && \
-    pip install pyinstaller && \
+    pip install patchelf-wrapper pyinstaller SCons && \
     BOOTLOADER_CC=/usr/bin/musl-gcc pip install https://github.com/JonathonReinhart/staticx/archive/master.zip && \
     if [ "$(dpkg --print-architecture)" = "armhf" ]; then \
       echo "Instructing pip to fetch wheels from piwheels.org" >&2; \
@@ -32,8 +30,7 @@ RUN apt-get update -qq && \
       make \
       musl \
       musl-dev \
-      musl-tools \
-      scons && \
+      musl-tools && \
     apt-get autoremove --purge -yq && \
     rm -rf /root/.cache /root/.rustup /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
