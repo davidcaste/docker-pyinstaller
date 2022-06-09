@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DEFAULT_IMAGE_NAME=pschmitt/pyinstaller
+DEFAULT_IMAGE_NAME=davidcaste/pyinstaller_staticx
 
 usage() {
   echo "Usage: $0 [PYTHON_VERSION]"
